@@ -60,3 +60,4 @@ tests:
     dependencies:
     - poip
     - hspec
+    - parsec

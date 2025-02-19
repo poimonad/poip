@@ -186,6 +186,13 @@ entail ce ps p = any (p `elem`) (map (`bySuper` ce) ps) ||
   case byInst p ce of
     Left _ -> False
     Right qs -> all (entail ce ps) qs
+  
+inHnf :: Pred -> Bool
+inHnf (Constraint i t) = hnf t
+  where
+    hnf (TVar v) = True
+    hnf (TCon tc) = False
+    hnf (TApp t _) = hnf t
 
 infixr 0 <#>
 (<#>) :: Functor f => f a -> (a -> b) -> f b
